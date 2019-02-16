@@ -1,0 +1,29 @@
+{
+  "name": "museme-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/museme-co/museme-backend.git"
+  },
+  "author": "DavNej",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/museme-co/museme-backend/issues"
+  },
+  "homepage": "https://github.com/museme-co/museme-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.13"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
