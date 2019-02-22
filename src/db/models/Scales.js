@@ -16,6 +16,4 @@ const scalesSchema = new mongoose.Schema({
 	}
 });
 
-const Scale = mongoose.model('Scale', scalesSchema);
-
-module.exports = Scale;
+const Scale = module.exports = mongoose.model('Scale', scalesSchema);

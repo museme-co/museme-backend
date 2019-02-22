@@ -13,6 +13,4 @@ const accidentalSchema = new mongoose.Schema({
   }
 });
 
-const Accidental = mongoose.model('Accidental', accidentalSchema);
-
-module.exports = Accidental;
+const Accidental = module.exports = mongoose.model('Accidental', accidentalSchema);
