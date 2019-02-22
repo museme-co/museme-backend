@@ -20,11 +20,11 @@ router.get('/:accidentalName', async (req, res) => {
 
 async function loadAccidentalsCollection(){
   const client = await mongodb.MongoClient.connect(
-    "mongodb://localhost:27017/museme-scales-app-db",
+    process.env.DB_HOST,
     { useNewUrlParser: true }
   );
 
-   return client.db('museme-scales-app-db').collection('accidentals');
+   return client.db(process.env.DB_NAME).collection('accidentals');
 }
 
 module.exports = router;

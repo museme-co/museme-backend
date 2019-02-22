@@ -1,5 +1,8 @@
 'use strict';
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -7,8 +10,8 @@ const cors = require('cors');
 const app = express();
 
 const db = require('./db/index')
-const url = process.env.MONGOURL || "mongodb://localhost:27017/museme-scales-app-db"
-db.connect(url);
+
+db.connect(process.env.DB_HOST);
 
 
 // Middleware

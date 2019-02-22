@@ -19,11 +19,11 @@ router.get('/:noteName', async (req, res) => {
 
 async function loadNotesCollection(){
   const client = await mongodb.MongoClient.connect(
-    "mongodb://localhost:27017/museme-scales-app-db",
+    process.env.DB_HOST,
     { useNewUrlParser: true }
   );
 
-   return client.db('museme-scales-app-db').collection('notes');
+   return client.db(process.env.DB_NAME).collection('notes');
 }
 
 module.exports = router;

@@ -25,7 +25,7 @@ async function populateCollection(dataArray, collection) {
 async function main() {
   // Connect to db
   await mongoose.connect(
-    process.env.MONGOURL || "mongodb://localhost:27017/museme-scales-app-db",
+    process.env.DB_HOST,
     {useNewUrlParser: true}).then(
       () => console.log('Database connection established'),
       err => console.error('Error when connecting to the database'+ err)
