@@ -1,30 +1,23 @@
 'use-strict';
 
-const express = require('express');
-const mongodb = require('mongodb');
-
-const router = express.Router();
+const router = require('express').Router();
+const Scales = require('../../db/models/Scales')
 
 // Get all scales
-router.get('/', async (req, res) => {
-  const scales = await loadScalesCollection();
-  res.json( await scales.find({}).toArray() );
+router.get('/', (req, res) => {
+  Scales.find({}, (err, scales) => {
+    if (err) return console.log(err);
+    res.json( scales );
+  });
 });
 
 // Get one note by name
 // Refactor with id
-router.get('/:scaleSlug', async (req, res) => {
-  const scales = await loadScalesCollection();
-  res.json( await scales.findOne({ name: req.params.scaleSlug }))
+router.get('/:scaleSlug', (req, res) => {
+  Scales.findOne({ name: req.params.scaleSlug }, (err, note) => {
+    if (err) return console.log(err);
+    res.json( note );
+  });
 });
-
-async function loadScalesCollection(){
-  const client = await mongodb.MongoClient.connect(
-    process.env.DB_HOST,
-    { useNewUrlParser: true }
-  );
-
-   return client.db(process.env.DB_NAME).collection('scales');
-}
 
 module.exports = router;

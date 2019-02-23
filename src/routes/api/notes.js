@@ -1,29 +1,22 @@
 'use-strict';
 
-const express = require('express');
-const mongodb = require('mongodb');
-
-const router = express.Router();
+const router = require('express').Router();
+const Notes = require('../../db/models/Notes')
 
 // Get all notes
-router.get('/', async (req, res) => {
-  const notes = await loadNotesCollection();
-  res.json( await notes.find({}).toArray() );
+router.get('/', (req, res) => {
+  Notes.find({}, (err, notes) => {
+    if (err) return console.log(err);
+    res.json( notes );
+  });
 });
 
 // Get one note by name
-router.get('/:noteName', async (req, res) => {
-  const notes = await loadNotesCollection();
-  res.json( await notes.findOne({ name: req.params.noteName }))
+router.get('/:noteName', (req, res) => {
+  Notes.findOne({ name: req.params.noteName }, (err, note) => {
+    if (err) return console.log(err);
+    res.json( note );
+  });
 });
-
-async function loadNotesCollection(){
-  const client = await mongodb.MongoClient.connect(
-    process.env.DB_HOST,
-    { useNewUrlParser: true }
-  );
-
-   return client.db(process.env.DB_NAME).collection('notes');
-}
 
 module.exports = router;

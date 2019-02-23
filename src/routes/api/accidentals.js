@@ -1,30 +1,23 @@
 'use-strict';
 
-const express = require('express');
-const mongodb = require('mongodb');
-
-const router = express.Router();
+const router = require('express').Router();
+const Accidentals = require('../../db/models/Accidentals')
 
 // Get all accidentals
-router.get('/', async (req, res) => {
-  const accidentals = await loadAccidentalsCollection();
-  res.json( await accidentals.find({}).toArray() );
+router.get('/', (req, res) => {
+  Accidentals.find({}, (err, accidentals) => {
+    if (err) return console.log(err);
+    res.json( accidentals );
+  });
 });
 
-// Get one note by name
+// Get one accidental by name
 // Refactor with id
-router.get('/:accidentalName', async (req, res) => {
-  const accidentals = await loadAccidentalsCollection();
-  res.json( await accidentals.findOne({ name: req.params.accidentalName }))
+router.get('/:accidentalName', (req, res) => {
+  Accidentals.findOne({ name: req.params.accidentalName }, (err, note) => {
+    if (err) return console.log(err);
+    res.json( note );
+  });
 });
-
-async function loadAccidentalsCollection(){
-  const client = await mongodb.MongoClient.connect(
-    process.env.DB_HOST,
-    { useNewUrlParser: true }
-  );
-
-   return client.db(process.env.DB_NAME).collection('accidentals');
-}
 
 module.exports = router;
