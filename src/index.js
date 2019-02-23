@@ -25,7 +25,10 @@ var db = require('./db/index')
 let connection = db.connect()
 
 connection.on('error', console.warn)
-connection.on('disconnected', db.reconnect)
+connection.on('disconnected', () => {
+  console.log('Database disconnected. Reconnecting in 10 sec');
+  setTimeout(db.connect, 10000);
+});
 connection.once('open', listen);
 
 // Server listenning

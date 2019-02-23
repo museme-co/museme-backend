@@ -8,11 +8,6 @@ function connect() {
   return mongoose.connection
 };
 
-function reconnect() {
-  setTimeout(() => connect(), 2000)
-};
-
 module.exports = {
-  connect,
-  reconnect
+  connect
 }
