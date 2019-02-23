@@ -1,35 +1,38 @@
 'use strict';
 
-const dotenv = require('dotenv');
-dotenv.config();
-
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
-const app = express();
-
-const db = require('./db/index')
-
-db.connect(process.env.DB_HOST);
-
-
-// Middleware
-app.use(bodyParser.json())
-app.use(cors()) 
+// Load environment vars form .env file
+const dotenv = require('dotenv').config();
 
 const port = process.env.PORT || 3000;
 
-const notes = require('./routes/api/notes')
-app.use('/api/notes', notes)
+// Server setup with express
+const express = require('express');
+const server = express();
 
-const scales = require('./routes/api/scales')
-app.use('/api/scales', scales)  
+// Middleware
+const bodyParser = require('body-parser');
+const cors = require('cors');
+server.use(cors());
+server.use(bodyParser.json());
 
-const accidentals = require('./routes/api/accidentals')
-app.use('/api/accidentals', accidentals)  
+// API Routes
+server.use('/api/notes', require('./routes/api/notes'));
+server.use('/api/scales', require('./routes/api/scales'));
+server.use('/api/accidentals', require('./routes/api/accidentals'));
 
-app.listen(port, () => {
-  console.log('Server started');
-  console.log(`Listenning on port ${port}`);
-});
+// Connect to database
+var db = require('./db/index')
+let connection = db.connect()
+
+connection.on('error', console.warn)
+connection.on('disconnected', db.reconnect)
+connection.once('open', listen);
+
+// Server listenning
+function listen () {
+  // if (app.get('env') === 'test') return;
+  server.listen(port, () => {
+    console.log('Server started');
+    console.log(`Listenning on port ${port}`);
+  });
+}

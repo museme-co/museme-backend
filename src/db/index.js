@@ -1,10 +1,18 @@
 const mongoose = require('mongoose');
 
-function connect(url) {
-  mongoose.connect(url, {useNewUrlParser: true}).then(
+function connect() {
+  mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true }).then(
     () => console.log('Database connection established'),
-    err => console.error('Error when connecting to the database'+ err)
+    err => console.log('Connection to database has failed')
   );
-}
+  return mongoose.connection
+};
 
-module.exports = {connect}
+function reconnect() {
+  setTimeout(() => connect(), 2000)
+};
+
+module.exports = {
+  connect,
+  reconnect
+}
