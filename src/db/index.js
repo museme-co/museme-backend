@@ -5,6 +5,7 @@ function connect() {
     () => console.log('Database connection established'),
     err => console.log('Connection to database has failed')
   );
+  mongoose.set('useCreateIndex', true);
   return mongoose.connection
 };
 

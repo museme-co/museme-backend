@@ -10,7 +10,7 @@ const Scale = require('../../db/models/Scales')
 const { scalesData } = require('./data-scales')
 
 
-async function populateCollection(dataArray, collection) {
+function populateCollection(dataArray, collection) {
   dataArray.forEach((element) => {
     var doc = new collection(element);
     doc.save().then( item => {
@@ -22,9 +22,9 @@ async function populateCollection(dataArray, collection) {
   });
 }
 
-async function main() {
+function main() {
   // Connect to db
-  await mongoose.connect(
+  mongoose.connect(
     process.env.DB_HOST,
     {useNewUrlParser: true}).then(
       () => console.log('Database connection established'),
@@ -32,11 +32,11 @@ async function main() {
       );
       
   // Insert documents
-  await populateCollection(scalesData, Scale);
-  await populateCollection(accidentalsData, Accidental);
-  await populateCollection(notesData, Note);
+  populateCollection(scalesData, Scale);
+  populateCollection(accidentalsData, Accidental);
+  populateCollection(notesData, Note);
 
+  mongoose.connection.close();
 }
 
 main();
-// mongoose.connection.close();
