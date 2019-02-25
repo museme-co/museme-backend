@@ -9,6 +9,9 @@ const port = process.env.PORT || 3000;
 const express = require('express');
 const server = express();
 
+// Loading config
+const config = require('./config/index');
+
 // Middleware
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -22,7 +25,7 @@ server.use('/api/accidentals', require('./routes/api/accidentals'));
 
 // Connect to database
 var db = require('./db/index')
-let connection = db.connect()
+let connection = db.connect(config.db)
 
 connection.on('error', console.warn)
 connection.on('disconnected', () => {
@@ -39,3 +42,5 @@ function listen () {
     console.log(`Listenning on port ${port}`);
   });
 }
+
+module.exports = server;
