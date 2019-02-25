@@ -25,7 +25,7 @@ function populateCollection(dataArray, collection) {
 function main() {
   // Connect to db
   mongoose.connect(
-    process.env.DB_HOST,
+    process.env.MONGODB_URI,
     {useNewUrlParser: true}).then(
       () => console.log('Database connection established'),
       err => console.error('Error when connecting to the database'+ err)
