@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 router.get('/:accidentalName', (req, res) => {
   Accidentals.findOne({ name: req.params.accidentalName }, (err, note) => {
     if (err) return console.log(err);
-    res.json( note );
+    res.status(200).json( note );
   });
 });
 

@@ -7,7 +7,7 @@ const Notes = require('../../db/models/Notes')
 router.get('/', (req, res) => {
   Notes.find({}, (err, notes) => {
     if (err) return console.log(err);
-    res.json( notes );
+    res.status(200).json( notes );
   });
 });
 
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.get('/:noteName', (req, res) => {
   Notes.findOne({ name: req.params.noteName }, (err, note) => {
     if (err) return console.log(err);
-    res.json( note );
+    res.status(200).json( note );
   });
 });
 
