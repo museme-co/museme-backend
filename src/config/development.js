@@ -2,6 +2,6 @@
 
 module.exports = {
   env: 'development',
-  db: 'mongodb://localhost:27017/museme-scales-app-db',
+  db: process.env.MONGO_URI,
   port: process.env.PORT || 3000
 };

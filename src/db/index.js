@@ -1,7 +1,9 @@
+'use strict';
+
 const mongoose = require('mongoose');
 
-function connect() {
-  mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).then(
+function connect(db_url) {
+  mongoose.connect(db_url, { useNewUrlParser: true }).then(
     () => console.log('Database connection established'),
     err => console.log('Connection to database has failed')
   );
