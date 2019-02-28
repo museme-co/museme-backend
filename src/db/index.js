@@ -3,11 +3,11 @@
 const mongoose = require('mongoose');
 
 function connect(db_url) {
-  mongoose.connect(db_url, { useNewUrlParser: true }).then(
+  mongoose.Promise = global.Promise;
+  mongoose.connect(db_url, { useNewUrlParser: true, useCreateIndex: true }).then(
     () => console.log('Database connection established'),
     err => console.log('Connection to database has failed')
   );
-  mongoose.set('useCreateIndex', true);
   return mongoose.connection
 };
 

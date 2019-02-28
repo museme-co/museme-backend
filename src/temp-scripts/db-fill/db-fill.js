@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('mongoose');
+const db = require('../../db/index');
 
 const Note = require('../../db/models/Notes')
 const { notesData } = require('./data-notes')
@@ -26,12 +26,7 @@ function populateCollection(dataArray, collection) {
 
 function main() {
   // Connect to db
-  mongoose.connect(
-    process.env.MONGODB_URI,
-    {useNewUrlParser: true}).then(
-      () => console.log('Database connection established'),
-      err => console.error('Error when connecting to the database'+ err)
-      );
+  db.connect(process.env.MONGODB_URI);
       
   // Insert documents
   populateCollection(scalesData, Scale);

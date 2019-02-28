@@ -1,7 +1,7 @@
 'use-strict';
 
 const router = require('express').Router();
-const Scales = require('../../db/models/Scales')
+const Scales = require('../lib/services/scaleService/ScaleModel')
 
 // Get all scales
 router.get('/', (req, res) => {

@@ -1,7 +1,7 @@
 'use-strict';
 
 const router = require('express').Router();
-const Accidentals = require('../../db/models/Accidentals')
+const Accidentals = require('../lib/services/accidentalService/AccidentalModel')
 
 // Get all accidentals
 router.get('/', (req, res) => {
