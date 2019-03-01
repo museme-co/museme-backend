@@ -10,6 +10,7 @@ const scaleSchema = new Schema({
 	},
 	type: {
     type: String,
+    enum: ['triad', 'scale', 'arpeggio'],
     required: true
 	},
   slug: {

@@ -6,6 +6,7 @@ const accidentalSchema = new Schema({
   name: {
 		type: String,
     required: true,
+    enum: ['flat', 'natural', 'sharp'],
     unique: true
 	},
 	charcode: {
@@ -15,6 +16,8 @@ const accidentalSchema = new Schema({
 	},
   value: {
     type: Number,
+    min: -1,
+    max: 1,
     required: true,
     unique: true
   }
