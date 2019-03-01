@@ -2,15 +2,39 @@
 
 const mongoose = require('mongoose');
 
-function connect(db_url) {
+function connect(db_uri) {
   mongoose.Promise = global.Promise;
-  mongoose.connect(db_url, { useNewUrlParser: true, useCreateIndex: true }).then(
-    () => console.log('Database connection established'),
-    err => console.log('Connection to database has failed')
-  );
-  return mongoose.connection
+
+  const reconnectInterval = 5000;
+  
+  const options = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    reconnectInterval: reconnectInterval,
+    connectTimeoutMS: 10000
+  };
+
+  mongoose.connect(db_uri, options);
+
+  let connection = mongoose.connection;
+
+  connection.on('error', (err) => {
+    console.log('an error occured')
+    console.log(err)
+  });
+  connection.on('disconnected', () => {
+    console.log('disconnected')
+    // setTimeout(connect, reconnectInterval);
+  });
+
+  return connection
 };
 
+function close() {
+  return mongoose.disconnect();
+}
+
 module.exports = {
-  connect
+  connect,
+  close
 }
