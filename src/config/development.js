@@ -2,6 +2,6 @@
 
 module.exports = {
   env: 'development',
-  db: process.env.MONGO_URI,
+  db: process.env.MONGODB_URI,
   port: process.env.PORT || 3000
 };

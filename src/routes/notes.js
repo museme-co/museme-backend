@@ -36,7 +36,6 @@ router.post('/add-note', async (req, res, next) => {
     if (err) {
       // TODO add data validation with joi module
       // TODO handle errors (duplicate enrtry)
-
       throw new Error(err);
     }
     res.status(200).json({ message: 'Note added to database' , data: note});

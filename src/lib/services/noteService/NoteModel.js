@@ -8,7 +8,8 @@ const noteSchema = new Schema({
     unique: true
 	},
 	value: {
-		type: Number
+		type: Number,
+		unique: true
 	},
 	possibleAccidentals: {
 		type: Array

@@ -5,16 +5,22 @@ const { Schema, model } = require('mongoose');
 const scaleSchema = new Schema({
   name: {
     type: String,
+    required: true,
     unique: true
 	},
 	type: {
-    type: String
+    type: String,
+    required: true
 	},
   slug: {
-    type: String
+    type: String,
+    required: true,
+    unique: true
   },
 	intervals: {
-    type: Array
+    type: Array,
+    required: true,
+    unique: true
 	}
 });
 

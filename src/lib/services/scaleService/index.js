@@ -12,8 +12,8 @@ class ScaleService {
   listScales(callback) {
     return this.ScaleModel.find({}, callback);
   }
-  getScale(name, callback) {
-    return this.ScaleModel.findOne({ name }, callback);
+  getScale(slug, callback) {
+    return this.ScaleModel.findOne({ slug }, callback);
   }
   addScale(scale, callback) {
     return this.ScaleModel.create(scale, callback);

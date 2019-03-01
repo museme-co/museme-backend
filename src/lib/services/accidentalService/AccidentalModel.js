@@ -5,13 +5,18 @@ const { Schema, model } = require('mongoose');
 const accidentalSchema = new Schema({
   name: {
 		type: String,
+    required: true,
     unique: true
 	},
 	charcode: {
-    type: Number
+    type: Number,
+    required: true,
+    unique: true
 	},
   value: {
-    type: Number
+    type: Number,
+    required: true,
+    unique: true
   }
 });
 
