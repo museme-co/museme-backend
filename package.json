@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "NODE_ENV=test mocha ./src/test/**/*.test.js --timeout 10000",
+    "test": "NODE_ENV=test mocha './test/**/*.test.js'",
     "dev": "nodemon server.js"
   },
   "repository": {
